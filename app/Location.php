@@ -9,4 +9,8 @@ class Location extends Model
     protected $fiilable = [
         "name", "name_id"
     ];
+
+    public function users(){
+        return $this -> belongsToMany("App\User");
+    }
 }
