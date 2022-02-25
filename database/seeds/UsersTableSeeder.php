@@ -18,5 +18,12 @@ class UsersTableSeeder extends Seeder
             "created_at" => new Datetime(),
             "updated_at" => new Datetime(),
         ]);
+        DB::table("users")->insert([
+            "name" => "shomffl",
+            "email" => "shomffl@gmail.com",
+            "password" => Hash::make("20010226"),
+            "created_at" => new Datetime(),
+            "updated_at" => new Datetime(),
+        ]);
     }
 }
