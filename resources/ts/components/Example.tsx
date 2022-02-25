@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const Example = () => {
+const Example:React.FC = () => {
     return (
         <div>
             <h1>洗濯日和</h1>
@@ -12,6 +12,6 @@ const Example = () => {
 
 export default Example;
 
-if (document.getElementById('root')) {
-    ReactDOM.render(<Example />, document.getElementById('root'));
+if (document.getElementById('example')) {
+    ReactDOM.render(<Example />, document.getElementById('example'));
 }
