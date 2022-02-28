@@ -4,16 +4,26 @@ import { useNavigate } from "react-router-dom";
 
 const SelectLocation = () => {
     const [locations, setLocations] = useState<string[]>([]);
+    const [sendLocations, setSendLocations] = useState<string[]>([]);
     const navigate = useNavigate();
-    const data_list = ["札幌", "函館", "横浜", "相模原", "八千代", "大阪"];
 
     useEffect(() => {
         axios.get("http://127.0.0.1:8000/locations/get").then((res) => {
             setLocations(res.data.locations_data);
         });
     }, []);
+    console.log(sendLocations);
 
-    console.log(locations);
+    const checkLocationsData = (data: string) => {
+        const indexNum = sendLocations.indexOf(data);
+        if (sendLocations.includes(data)) {
+            const copyArray = [...sendLocations];
+            copyArray.splice(indexNum, 1);
+            setSendLocations(copyArray);
+        } else {
+            setSendLocations([...sendLocations, data]);
+        }
+    };
 
     return (
         <>
@@ -30,9 +40,11 @@ const SelectLocation = () => {
                                 <input
                                     type="checkbox"
                                     value={data["name"]}
-                                    onChange={(e) =>
-                                        console.log(e.target.value)
-                                    }
+                                    onChange={(
+                                        e: React.ChangeEvent<HTMLInputElement>
+                                    ) => {
+                                        checkLocationsData(e.target.value);
+                                    }}
                                 />
                             </td>
                         ))}

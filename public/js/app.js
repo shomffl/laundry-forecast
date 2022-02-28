@@ -1841,6 +1841,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1863,14 +1871,32 @@ var SelectLocation = function SelectLocation() {
       locations = _useState2[0],
       setLocations = _useState2[1];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      sendLocations = _useState4[0],
+      setSendLocations = _useState4[1];
+
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)();
-  var data_list = ["札幌", "函館", "横浜", "相模原", "八千代", "大阪"];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     axios__WEBPACK_IMPORTED_MODULE_1___default().get("http://127.0.0.1:8000/locations/get").then(function (res) {
       setLocations(res.data.locations_data);
     });
   }, []);
-  console.log(locations);
+  console.log(sendLocations);
+
+  var checkLocationsData = function checkLocationsData(data) {
+    var indexNum = sendLocations.indexOf(data);
+
+    if (sendLocations.includes(data)) {
+      var copyArray = _toConsumableArray(sendLocations);
+
+      copyArray.splice(indexNum, 1);
+      setSendLocations(copyArray);
+    } else {
+      setSendLocations([].concat(_toConsumableArray(sendLocations), [data]));
+    }
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, Object.values(locations).map(function (data, key) {
     return react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", {
       key: key
@@ -1882,7 +1908,7 @@ var SelectLocation = function SelectLocation() {
       type: "checkbox",
       value: data["name"],
       onChange: function onChange(e) {
-        return console.log(e.target.value);
+        checkLocationsData(e.target.value);
       }
     }));
   })))));
