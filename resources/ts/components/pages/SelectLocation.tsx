@@ -29,9 +29,10 @@ const SelectLocation = () => {
         const data = {
             locations: sendLocations,
         };
-        axios
-            .post("locations/store", data)
-            .then((res: any) => console.log(res.data));
+        axios.post("locations/store", data).then((res: any) => {
+            console.log(res.data.comment);
+            navigate("/laundry-forecast");
+        });
     };
 
     return (

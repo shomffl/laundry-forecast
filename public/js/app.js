@@ -1902,7 +1902,8 @@ var SelectLocation = function SelectLocation() {
       locations: sendLocations
     };
     axios__WEBPACK_IMPORTED_MODULE_1___default().post("locations/store", data).then(function (res) {
-      return console.log(res.data);
+      console.log(res.data.comment);
+      navigate("/laundry-forecast");
     });
   };
 

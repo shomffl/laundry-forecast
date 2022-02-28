@@ -20,6 +20,6 @@ class LocationController extends Controller
         $input_locations = $request["locations"];
         $user_info->locations()->attach($input_locations);
         
-        return response()->json(["test" => "this is test."]);
+        return response()->json(["comment" => "data has been stored."]);
     }
 }
