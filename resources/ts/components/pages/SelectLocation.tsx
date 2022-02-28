@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 const SelectLocation = () => {
     const [locations, setLocations] = useState<string[]>([]);
     const [sendLocations, setSendLocations] = useState<string[]>([]);
-    const navigate = useNavigate();
+    const navigate: NavigateFunction = useNavigate();
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/locations/get").then((res) => {
+        axios.get("locations/get").then((res) => {
             setLocations(res.data.locations_data);
         });
     }, []);
@@ -25,6 +25,15 @@ const SelectLocation = () => {
         }
     };
 
+    const onClickSendLocations = () => {
+        const data = {
+            locations: sendLocations,
+        };
+        axios
+            .post("locations/store", data)
+            .then((res: any) => console.log(res.data));
+    };
+
     return (
         <>
             <table>
@@ -39,7 +48,7 @@ const SelectLocation = () => {
                             <td key={key}>
                                 <input
                                     type="checkbox"
-                                    value={data["name"]}
+                                    value={data["id"]}
                                     onChange={(
                                         e: React.ChangeEvent<HTMLInputElement>
                                     ) => {
@@ -51,6 +60,7 @@ const SelectLocation = () => {
                     </tr>
                 </tbody>
             </table>
+            <button onClick={onClickSendLocations}>send</button>
         </>
     );
 };

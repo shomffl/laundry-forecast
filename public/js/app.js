@@ -1878,7 +1878,7 @@ var SelectLocation = function SelectLocation() {
 
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    axios__WEBPACK_IMPORTED_MODULE_1___default().get("http://127.0.0.1:8000/locations/get").then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_1___default().get("locations/get").then(function (res) {
       setLocations(res.data.locations_data);
     });
   }, []);
@@ -1897,6 +1897,15 @@ var SelectLocation = function SelectLocation() {
     }
   };
 
+  var onClickSendLocations = function onClickSendLocations() {
+    var data = {
+      locations: sendLocations
+    };
+    axios__WEBPACK_IMPORTED_MODULE_1___default().post("locations/store", data).then(function (res) {
+      return console.log(res.data);
+    });
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, Object.values(locations).map(function (data, key) {
     return react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", {
       key: key
@@ -1906,12 +1915,14 @@ var SelectLocation = function SelectLocation() {
       key: key
     }, react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
       type: "checkbox",
-      value: data["name"],
+      value: data["id"],
       onChange: function onChange(e) {
         checkLocationsData(e.target.value);
       }
     }));
-  })))));
+  })))), react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    onClick: onClickSendLocations
+  }, "send"));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SelectLocation);
