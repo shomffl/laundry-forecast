@@ -14,6 +14,6 @@ class UserController extends Controller
     {
         $user_id = Auth::id();
         $user = User::find($user_id)->locations;
-        return response()->json(["data" => $user]);
+        return response()->json(["locations_data" => $user]);
     }
 }
