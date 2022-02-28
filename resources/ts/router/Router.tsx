@@ -9,7 +9,7 @@ const Router: React.VFC = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<SelectLocation />} />
-                <Route path="laundry-forecast" element={<LaundryForecast />} />
+                <Route path="/laundry-forecast" element={<LaundryForecast />} />
             </Routes>
         </BrowserRouter>
     );

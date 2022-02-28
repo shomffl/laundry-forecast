@@ -1882,7 +1882,6 @@ var SelectLocation = function SelectLocation() {
       setLocations(res.data.locations_data);
     });
   }, []);
-  console.log(sendLocations);
 
   var checkLocationsData = function checkLocationsData(data) {
     var indexNum = sendLocations.indexOf(data);
@@ -1958,7 +1957,7 @@ var Router = function Router() {
     path: "/",
     element: react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_pages_SelectLocation__WEBPACK_IMPORTED_MODULE_2__["default"], null)
   }), react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
-    path: "laundry-forecast",
+    path: "/laundry-forecast",
     element: react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_pages_LaundryForecast__WEBPACK_IMPORTED_MODULE_3__["default"], null)
   })));
 };

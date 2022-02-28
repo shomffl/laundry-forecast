@@ -12,7 +12,6 @@ const SelectLocation = () => {
             setLocations(res.data.locations_data);
         });
     }, []);
-    console.log(sendLocations);
 
     const checkLocationsData = (data: string) => {
         const indexNum = sendLocations.indexOf(data);
