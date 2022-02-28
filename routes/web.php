@@ -10,7 +10,7 @@ Route::group(["middleware" => ["auth"]], function(){
     Route::get("locations/get", "LocationController@get");
     Route::post("locations/store", "LocationController@store");
 
-    Route::get("user/get/{id}", "UserController@get");
+    Route::get("user/get", "UserController@get");
 
 
     Route::get('/{any}', function () {

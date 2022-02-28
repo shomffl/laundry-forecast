@@ -1826,7 +1826,9 @@ __webpack_require__.r(__webpack_exports__);
 var LaundryForecast = function LaundryForecast() {
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    axios__WEBPACK_IMPORTED_MODULE_1___default().get("/");
+    axios__WEBPACK_IMPORTED_MODULE_1___default().get("/user/get").then(function (res) {
+      return console.log(res.data);
+    });
   }, []);
   return react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "LaundryForecast");
 };

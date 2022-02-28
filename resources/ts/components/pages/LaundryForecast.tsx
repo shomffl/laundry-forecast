@@ -5,7 +5,7 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 const LaundryForecast = () => {
     const navigate: NavigateFunction = useNavigate();
     useEffect(() => {
-        axios.get("/");
+        axios.get("/user/get").then((res) => console.log(res.data));
     }, []);
 
     return <div>LaundryForecast</div>;
