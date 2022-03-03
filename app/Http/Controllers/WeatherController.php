@@ -115,7 +115,7 @@ class WeatherController extends Controller
    public function laundry_exponent($temp, $humidity)
    {
         $calc = round((0.81 * (float) $temp + 0.01 * (float) $humidity * (0.99 * (float) $temp - 14.3) + 46.3), 3);
-        logger($calc);
+        return $calc;
    }
 
 }
