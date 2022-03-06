@@ -31,8 +31,11 @@ class WeatherController extends Controller
             $wind = WeatherController::wind_info($one_of_data["wind"]["speed"]);
             
             $exponent = WeatherController::laundry_exponent($temp, $humidity);
+
+            $recommend = WeatherController::laundry_recommendation($weather_info["概要"], $exponent);
             
-            $one_of_forecast_array = array("日付" => $date, "天気" => $weather_info, "気温" => $temp, "湿度" => $humidity, "風" => $wind, "洗濯関数" => $exponent);
+            $one_of_forecast_array = array("日付" => $date, "天気" => $weather_info, "気温" => $temp, "湿度" => $humidity, "風" => $wind, "洗濯関数" => $exponent, "おすすめ度" => $recommend);
+            
             array_push($weather_array, $one_of_forecast_array);
         }
         return response()->json(["weather_data" => $weather_array]);
@@ -116,6 +119,55 @@ class WeatherController extends Controller
    {
         $calc = round((0.81 * (float) $temp + 0.01 * (float) $humidity * (0.99 * (float) $temp - 14.3) + 46.3), 3);
         return $calc;
+   }
+   # 洗濯のおすすめ度を計算する関数
+   public function laundry_recommendation($weather, $exponent)
+   {
+        $num = (int) $exponent;
+        $recommendation_text = "";
+        $recommendation_value = "";
+        
+        if ($num >= 70){
+            if ($weather === "Clear"){
+                $recommendation_text = "最高の洗濯日和です!!!";
+                $recommendation_value = "5";
+            }
+            elseif ($weather === "Cloud"){
+                $recommendation_text = "天気の割に、洗濯物は乾きやすいです";
+                $recommendation_value = "4";
+            }
+            else{
+                $recommendation_text = "室内干しをするなら...";
+                $recommendation_value = "2";
+            }
+        }elseif ($num >= 50){
+            if ($weather === "Clear"){
+                $recommendation_text = "洗濯日和です!!!";
+                $recommendation_value = "4";
+            }
+            elseif ($weather === "Cloud"){
+                $recommendation_text = "天気の割に、洗濯物は乾きやすいです";
+                $recommendation_value = "2";
+            }
+            else{
+                $recommendation_text = "室内干しをするなら...";
+                $recommendation_value = "2";
+            }
+        } elseif ($num < 50){
+            if ($weather === "Clear"){
+                $recommendation_text = "洗濯日和です!!!";
+                $recommendation_value = "4";
+            }
+            elseif ($weather === "Cloud"){
+                $recommendation_text = "洗濯物は乾きにくいです。室内干しの検討も...";
+                $recommendation_value = "2";
+            }
+            else{
+                $recommendation_text = "室内干しをするなら...";
+                $recommendation_value = "1";
+            }
+        } 
+        return (["おすすめ度" => $recommendation_value, "コメント" => $recommendation_text]);
    }
 
 }
