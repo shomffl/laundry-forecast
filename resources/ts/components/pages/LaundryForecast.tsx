@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 
 const LaundryForecast = () => {
     const [forecastData, setForecastData] = useState<any[]>([]);
@@ -27,6 +28,15 @@ const LaundryForecast = () => {
         p: 4,
     };
 
+    const textStyle = {
+        textAlign: "center",
+    };
+
+    const buttonStyle = {
+        color: "black",
+        borderColor: "black",
+    };
+
     const navigate: NavigateFunction = useNavigate();
     useEffect(() => {
         axios.get("/user/get").then((res: AxiosResponse<any>) => {
@@ -40,47 +50,45 @@ const LaundryForecast = () => {
         });
     }, []);
     console.log(forecastData);
-    console.log("modalNum", modalNum);
-    console.log(openModal);
-    console.log("data", forecastData[modalNum]);
     return (
         <>
             <Grid container spacing={2}>
                 {Object.values(forecastData).map((data: any, key: any) => (
                     <Grid item md={3} key={key}>
-                        <Card>
+                        <Card sx={{ m: 3 }}>
                             <CardContent>
-                                <Typography
-                                    variant="h4"
-                                    style={{
-                                        textAlign: "center",
-                                    }}
-                                >
+                                <Typography variant="h4" sx={textStyle}>
                                     {data["日付"]}
                                 </Typography>
-                                <Typography style={{ textAlign: "center" }}>
+                                <Typography sx={textStyle}>
                                     <img src={data["天気"]["画像"]} />
                                 </Typography>
-                                <Typography
-                                    variant="h6"
-                                    style={{ textAlign: "center" }}
-                                >
+                                <Typography variant="h6" sx={textStyle}>
                                     {data["天気"]["概要"]}
                                 </Typography>
-                                <Typography style={{ textAlign: "center" }}>
+                                <Typography sx={textStyle}>
                                     {data["おすすめ度"]["コメント"]}
                                 </Typography>
                             </CardContent>
-                            <CardActions>
-                                <button
+
+                            <CardActions
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                }}
+                            >
+                                <Button
+                                    variant="outlined"
+                                    sx={buttonStyle}
                                     onClick={(e) => {
                                         setOpenModal(!openModal),
                                             setModalNum(key);
                                     }}
                                 >
                                     Learn More
-                                </button>
+                                </Button>
                             </CardActions>
+
                             <Modal
                                 open={openModal}
                                 onClose={(e) => setOpenModal(!openModal)}
