@@ -9,8 +9,16 @@ import CardActions from "@mui/material/CardActions";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
 
 const LaundryForecast = () => {
+    const [locationsData, setLocationsData] = useState<any[]>([]);
+    const [selectedLocationName, setSelectedLocationName] =
+        useState<string>("");
+    const [selectedLocationId, setSelectedLocationId] = useState<string>("");
     const [forecastData, setForecastData] = useState<any[]>([]);
     const [openModal, setOpenModal] = useState<boolean>(false);
     const [modalNum, setModalNum] = useState<any>(0);
@@ -40,6 +48,9 @@ const LaundryForecast = () => {
     const navigate: NavigateFunction = useNavigate();
     useEffect(() => {
         axios.get("/user/get").then((res: AxiosResponse<any>) => {
+            setLocationsData(res.data.locations_data);
+            setSelectedLocationName(res.data.locations_data[0]["name"]);
+            setSelectedLocationId(res.data.locations_data[0]["name_id"]);
             axios
                 .post("/weather/get", {
                     location_name_id: res.data.locations_data[0]["name_id"],
@@ -49,9 +60,33 @@ const LaundryForecast = () => {
                 );
         });
     }, []);
-    console.log(forecastData);
     return (
         <>
+            <Card sx={{ mt: 3, mx: 3 }}>
+                <CardContent>
+                    <Typography variant="h4">
+                        {selectedLocationName}の洗濯情報
+                    </Typography>
+                    <FormControl fullWidth>
+                        <InputLabel>{selectedLocationName}</InputLabel>
+                        <Select
+                            onChange={(e) =>
+                                setSelectedLocationId(e.target.value)
+                            }
+                            value={selectedLocationId}
+                        >
+                            {Object.values(locationsData).map(
+                                (data: any, key: any) => (
+                                    <MenuItem key={key} value={data["name_id"]}>
+                                        {data["name"]}
+                                    </MenuItem>
+                                )
+                            )}
+                        </Select>
+                    </FormControl>
+                </CardContent>
+            </Card>
+
             <Grid container spacing={2}>
                 {Object.values(forecastData).map((data: any, key: any) => (
                     <Grid item md={3} key={key}>
