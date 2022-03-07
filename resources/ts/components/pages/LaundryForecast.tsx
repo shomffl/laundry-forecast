@@ -61,6 +61,25 @@ const LaundryForecast = () => {
         });
     }, []);
 
+    const handleForecastData = () => {
+        findLocation();
+        axios
+            .post("/weather/get", {
+                location_name_id: selectedLocationId,
+            })
+            .then((res: AxiosResponse<any>) => {
+                setForecastData(res.data.weather_data);
+                console.log(res.data);
+            });
+    };
+
+    const findLocation = () => {
+        for (let i = 0; i < locationsData.length; i++) {
+            if (selectedLocationId == locationsData[i]["name_id"]) {
+                setSelectedLocationName(locationsData[i]["name"]);
+            }
+        }
+    };
     return (
         <>
             <Grid container spacing={2}>
@@ -83,9 +102,10 @@ const LaundryForecast = () => {
                             >
                                 <InputLabel>{selectedLocationName}</InputLabel>
                                 <Select
-                                    onChange={(e) =>
-                                        setSelectedLocationId(e.target.value)
-                                    }
+                                    onChange={(e) => {
+                                        console.log(e.target.value);
+                                        setSelectedLocationId(e.target.value);
+                                    }}
                                     value={selectedLocationId}
                                 >
                                     {Object.values(locationsData).map(
@@ -93,6 +113,11 @@ const LaundryForecast = () => {
                                             <MenuItem
                                                 key={key}
                                                 value={data["name_id"]}
+                                                onChange={(e) =>
+                                                    setSelectedLocationName(
+                                                        data["name"]
+                                                    )
+                                                }
                                             >
                                                 {data["name"]}
                                             </MenuItem>
@@ -107,6 +132,7 @@ const LaundryForecast = () => {
                                     borderColor: "black",
                                     width: 1 / 2,
                                 }}
+                                onClick={handleForecastData}
                             >
                                 Change Location
                             </Button>

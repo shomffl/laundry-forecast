@@ -22375,6 +22375,25 @@ var LaundryForecast = function LaundryForecast() {
       });
     });
   }, []);
+
+  var handleForecastData = function handleForecastData() {
+    findLocation();
+    axios__WEBPACK_IMPORTED_MODULE_1___default().post("/weather/get", {
+      location_name_id: selectedLocationId
+    }).then(function (res) {
+      setForecastData(res.data.weather_data);
+      console.log(res.data);
+    });
+  };
+
+  var findLocation = function findLocation() {
+    for (var i = 0; i < locationsData.length; i++) {
+      if (selectedLocationId == locationsData[i]["name_id"]) {
+        setSelectedLocationName(locationsData[i]["name"]);
+      }
+    }
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], {
     container: true,
     spacing: 2
@@ -22405,13 +22424,17 @@ var LaundryForecast = function LaundryForecast() {
     }
   }, react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material_InputLabel__WEBPACK_IMPORTED_MODULE_8__["default"], null, selectedLocationName), react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material_Select__WEBPACK_IMPORTED_MODULE_9__["default"], {
     onChange: function onChange(e) {
-      return setSelectedLocationId(e.target.value);
+      console.log(e.target.value);
+      setSelectedLocationId(e.target.value);
     },
     value: selectedLocationId
   }, Object.values(locationsData).map(function (data, key) {
     return react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material_MenuItem__WEBPACK_IMPORTED_MODULE_10__["default"], {
       key: key,
-      value: data["name_id"]
+      value: data["name_id"],
+      onChange: function onChange(e) {
+        return setSelectedLocationName(data["name"]);
+      }
     }, data["name"]);
   }))), react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material_Button__WEBPACK_IMPORTED_MODULE_11__["default"], {
     variant: "outlined",
@@ -22419,7 +22442,8 @@ var LaundryForecast = function LaundryForecast() {
       color: "black",
       borderColor: "black",
       width: 1 / 2
-    }
+    },
+    onClick: handleForecastData
   }, "Change Location"))))), react__WEBPACK_IMPORTED_MODULE_0__.createElement(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], {
     container: true,
     spacing: 2
