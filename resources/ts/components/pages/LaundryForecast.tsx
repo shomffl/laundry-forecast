@@ -60,20 +60,27 @@ const LaundryForecast = () => {
                 );
         });
     }, []);
+
     return (
         <>
             <Grid container spacing={2}>
-                <Card sx={{ ml: 5, mt: 2, width: 1 / 4 }}>
-                    <CardContent>
-                        <Typography variant="h3">
-                            {selectedLocationName}の洗濯情報
-                        </Typography>
-                    </CardContent>
-                </Card>
-                <Card sx={{ ml: 3, mt: 2, width: 1 / 3 }}>
-                    <CardContent>
-                        <Box sx={{ display: "flex", gap: 3 }}>
-                            <FormControl sx={{ width: 1 / 4 }}>
+                <Grid item md={4}>
+                    <Card sx={{ mx: 3 }}>
+                        <CardContent>
+                            <Typography variant="h3">
+                                {selectedLocationName}の洗濯情報
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item md={4}>
+                    <Card sx={{ mx: 3 }}>
+                        <CardContent sx={{ display: "flex", gap: 2 }}>
+                            <FormControl
+                                sx={{
+                                    width: 1 / 2,
+                                }}
+                            >
                                 <InputLabel>{selectedLocationName}</InputLabel>
                                 <Select
                                     onChange={(e) =>
@@ -98,14 +105,14 @@ const LaundryForecast = () => {
                                 sx={{
                                     color: "black",
                                     borderColor: "black",
-                                    width: 1 / 3,
+                                    width: 1 / 2,
                                 }}
                             >
                                 Change Location
                             </Button>
-                        </Box>
-                    </CardContent>
-                </Card>
+                        </CardContent>
+                    </Card>
+                </Grid>
             </Grid>
 
             <Grid container spacing={2}>
