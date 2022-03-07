@@ -62,30 +62,51 @@ const LaundryForecast = () => {
     }, []);
     return (
         <>
-            <Card sx={{ mt: 3, mx: 3 }}>
-                <CardContent>
-                    <Typography variant="h4">
-                        {selectedLocationName}の洗濯情報
-                    </Typography>
-                    <FormControl fullWidth>
-                        <InputLabel>{selectedLocationName}</InputLabel>
-                        <Select
-                            onChange={(e) =>
-                                setSelectedLocationId(e.target.value)
-                            }
-                            value={selectedLocationId}
-                        >
-                            {Object.values(locationsData).map(
-                                (data: any, key: any) => (
-                                    <MenuItem key={key} value={data["name_id"]}>
-                                        {data["name"]}
-                                    </MenuItem>
-                                )
-                            )}
-                        </Select>
-                    </FormControl>
-                </CardContent>
-            </Card>
+            <Grid container spacing={2}>
+                <Card sx={{ ml: 5, mt: 2, width: 1 / 4 }}>
+                    <CardContent>
+                        <Typography variant="h3">
+                            {selectedLocationName}の洗濯情報
+                        </Typography>
+                    </CardContent>
+                </Card>
+                <Card sx={{ ml: 3, mt: 2, width: 1 / 3 }}>
+                    <CardContent>
+                        <Box sx={{ display: "flex", gap: 3 }}>
+                            <FormControl sx={{ width: 1 / 4 }}>
+                                <InputLabel>{selectedLocationName}</InputLabel>
+                                <Select
+                                    onChange={(e) =>
+                                        setSelectedLocationId(e.target.value)
+                                    }
+                                    value={selectedLocationId}
+                                >
+                                    {Object.values(locationsData).map(
+                                        (data: any, key: any) => (
+                                            <MenuItem
+                                                key={key}
+                                                value={data["name_id"]}
+                                            >
+                                                {data["name"]}
+                                            </MenuItem>
+                                        )
+                                    )}
+                                </Select>
+                            </FormControl>
+                            <Button
+                                variant="outlined"
+                                sx={{
+                                    color: "black",
+                                    borderColor: "black",
+                                    width: 1 / 3,
+                                }}
+                            >
+                                Change Location
+                            </Button>
+                        </Box>
+                    </CardContent>
+                </Card>
+            </Grid>
 
             <Grid container spacing={2}>
                 {Object.values(forecastData).map((data: any, key: any) => (
