@@ -45,7 +45,6 @@ const LaundryForecast = () => {
         borderColor: "black",
     };
 
-    const navigate: NavigateFunction = useNavigate();
     useEffect(() => {
         axios.get("/user/get").then((res: AxiosResponse<any>) => {
             setLocationsData(res.data.locations_data);
@@ -100,10 +99,9 @@ const LaundryForecast = () => {
                                     width: 1 / 2,
                                 }}
                             >
-                                <InputLabel>{selectedLocationName}</InputLabel>
+                                <InputLabel>Location</InputLabel>
                                 <Select
                                     onChange={(e) => {
-                                        console.log(e.target.value);
                                         setSelectedLocationId(e.target.value);
                                     }}
                                     value={selectedLocationId}
