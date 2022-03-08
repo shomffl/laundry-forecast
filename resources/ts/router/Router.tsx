@@ -8,8 +8,8 @@ const Router: React.VFC = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<SelectLocation />} />
-                <Route path="/laundry-forecast" element={<LaundryForecast />} />
+                <Route path="/" element={<LaundryForecast />} />
+                <Route path="/select" element={<SelectLocation />} />
             </Routes>
         </BrowserRouter>
     );

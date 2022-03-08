@@ -11,14 +11,8 @@
         "emitDecoratorMetadata": true,
         "moduleResolution": "node",
         "target": "es6",
-        "lib": [
-            "es2016",
-            "dom"
-        ],
+        "lib": ["es2016", "dom"],
         "allowSyntheticDefaultImports": true
     },
-    "include": [
-        "./resources/ts/**/*.tsx",
-        "./resources/ts/src/types/**/*"
-    ]
+    "include": ["./resources/ts/**/*.tsx", "./resources/ts/src/types/**/*"]
 }

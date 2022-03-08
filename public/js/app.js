@@ -22642,10 +22642,10 @@ __webpack_require__.r(__webpack_exports__);
 var Router = function Router() {
   return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.BrowserRouter, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Routes, null, react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
     path: "/",
-    element: react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_pages_SelectLocation__WEBPACK_IMPORTED_MODULE_2__["default"], null)
-  }), react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
-    path: "/laundry-forecast",
     element: react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_pages_LaundryForecast__WEBPACK_IMPORTED_MODULE_3__["default"], null)
+  }), react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+    path: "/select",
+    element: react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_pages_SelectLocation__WEBPACK_IMPORTED_MODULE_2__["default"], null)
   })));
 };
 

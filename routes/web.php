@@ -20,4 +20,3 @@ Route::group(["middleware" => ["auth"]], function(){
         return view('index');
     })->where("any", ".*");
 });
-
