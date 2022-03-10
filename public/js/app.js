@@ -22347,7 +22347,7 @@ var LaundryForecast = function LaundryForecast() {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: "40vw",
-    bgcolor: "background.paper",
+    bgcolor: "white",
     border: "2px solid #000",
     boxShadow: 24,
     borderRadius: 2,
